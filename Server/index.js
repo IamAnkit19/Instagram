@@ -10,6 +10,7 @@ let User = require('./user')
 let bcrypt = require('bcrypt')
 let crypto = require('crypto');
 let {sendEmail} = require('./sendEmail')
+let Upload = require('./Upload');
 
 // npm i mongoose
 // npm i bcrypt
@@ -143,6 +144,18 @@ app.post('/login',async (req, res)=>{
          res.status(404).send("Wrong Password");
       }
    }
+})
+
+app.post('/upload', async (req,res)=>{
+   let {imgUrl} = req.body;
+   if(!imgUrl){
+      return res.send("Url not found");
+   }
+   let uploadData = new Upload({
+      imgUrl
+   })
+   await uploadData.save();
+   return res.send("Image Uploaded");
 })
 
 app.listen(4000, () => {

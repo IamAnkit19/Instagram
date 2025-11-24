@@ -3,4 +3,30 @@
     height: 100vh;
     border: 1px solid rgba(255, 255, 255, 0.475);
     box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    /* align-items: center; */
+}
+
+#userDetails{
+    width: 450px;
+    height: 200px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* border: 1px solid gray; */
+}
+
+#user{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: column;
+}
+
+#editProfileBtn{
+    width: 450px;
+    height: 50px;
+    background-color: rgb(16, 81, 81);
+    font-size: 17px;
 }
