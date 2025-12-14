@@ -16,25 +16,25 @@ const ForgetPassword = () => {
         }
     }
   return (
-    <div id='forgetDiv'>
-        <nav id='forgetNav'>
-            <h2>Instagram</h2>
+    <div className='w-screen h-screen flex justify-center items-center flex-col'>
+        <nav className='w-screen h-[50px] border border-[#FFFFFF7A] flex justify-around items-center box-border'>
+            <h2 className='font-[cursive]'>Instagram</h2>
             <div>
                 <Link to={'/signup'}>
-                    <button id='forgetSignup'>SignUp</button>
+                    <button className='bg-[#1D00FF] h-[30px] text-[16px] p-[2px] rounded-[8px] cursor-pointer'>SignUp</button>
                 </Link>
                 <Link to={'/'}>
-                    <button id='forgetLogin'>Login</button>
+                    <button className='w-[60px] border-none text-[#1D00FF] cursor-pointer text-[16px]'>Login</button>
                 </Link>
             </div>
         </nav>
-        <div id='forgetPass'>
-            <p style={{fontSize:"19px"}}>If you have forget your password then enter your email and we will send you a link to reset your password</p>
-            <input type="email" name='email' value={email} onChange={(e)=>setEmail(e.target.value)} placeholder='Enter your email'/>
-            <button onClick={fun2}>Send Reset Link</button>
-            <p>- - - - - - - - - - - OR - - - - - - - - - - -</p>
-            <Link to={'/signup'} style={{width:"90%"}}>
-                <button style={{width:"100%"}}>Create a new account</button>
+        <div className='m-auto w-[400px] h-[70vh] border border-[#FFFFFF7A] box-border flex justify-evenly items-center flex-col rounded-[8px]'>
+            <p className='text-[19px] text-center'>If you have forget your password then enter your email and we will send you a link to reset your password</p>
+            <input type="email" name='email' value={email} onChange={(e)=>setEmail(e.target.value)} placeholder='Enter your email' className='w-[90%] h-[45px] border border-[#FFFFFF7A] text-white pl-[2px] rounded-[6px] bg-[252525] text-[14px]'/>
+            <button onClick={fun2} className='w-[90%] h-[30px] bg-[#1D00FF] text-[17px] rounded-6px]'>Send Reset Link</button>
+            <p className='text-center'>- - - - - - - - - - - OR - - - - - - - - - - -</p>
+            <Link to={'/signup'} className='w-[90%]'>
+                <button className='w-[100%] h-[30px] bg-[#1D00FF] text-[17px] rounded-6px]'>Create a new account</button>
             </Link>
         </div>
     </div>

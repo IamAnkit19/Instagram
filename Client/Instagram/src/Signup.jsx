@@ -29,20 +29,20 @@ const Signup = () => {
         }
     }
   return (
-    <div className='main'>
+    <div className='w-screen h-screen flex justify-center items-center'>
         <div id="image">
             <img src={landingImage} alt="" />
         </div>
-        <div className='fields'>
-            <h1>Instagram</h1>
-            <input type="text" name='name' value={input.name} onChange={fun1} placeholder='Enter your full name'/>
-            <input type="text" name='userName' value={input.userName} onChange={fun1} placeholder='Create your username'/>
-            <input type="email" name='email' value={input.email} onChange={fun1} placeholder='Enter your email'/>
-            <input type="password" name='passWord' value={input.passWord} onChange={fun1} placeholder='Create your password'/>
-            <button onClick={fun2}>SignUp</button>
-            <p>Already have an account? 
+        <div className='h-[70vh] w-[300px] flex justify-evenly items-center flex-col'>
+            <h1 className='font-[cursive]'>Instagram</h1>
+            <input type="text" name='name' value={input.name} onChange={fun1} placeholder='Enter your full name' className='w-[90%] h-[45px] border border-gray-600 rounded-[6px] pl-[2px] text-white bg-[#252525] text-[14px]'/>
+            <input type="text" name='userName' value={input.userName} onChange={fun1} placeholder='Create your username' className='w-[90%] h-[45px] border border-gray-600 rounded-[6px] pl-[2px] text-white bg-[#252525] text-[14px]'/>
+            <input type="email" name='email' value={input.email} onChange={fun1} placeholder='Enter your email' className='w-[90%] h-[45px] border border-gray-600 rounded-[6px] pl-[2px] text-white bg-[#252525] text-[14px]'/>
+            <input type="password" name='passWord' value={input.passWord} onChange={fun1} placeholder='Create your password' className='w-[90%] h-[45px] border border-gray-600 rounded-[6px] pl-[2px] text-white bg-[#252525] text-[14px]'/>
+            <button onClick={fun2} className='w-[90%] h-[30px] bg-[#3827F5] text-[17px] rounded-[6px]'>SignUp</button>
+            <p className='flex justify-center items-center text-[15px]'>Already have an account? 
                 <Link to={'/'}>
-                    <button>Login</button>
+                    <button className='w-[60px] text-[#3827F5] text-[16px] border-none cursor-pointer hover:underline'>Login</button>
                 </Link>
             </p>
         </div>

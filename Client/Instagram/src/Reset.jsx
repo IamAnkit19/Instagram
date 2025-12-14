@@ -24,22 +24,22 @@ const Reset = () => {
         }
     }
   return (
-    <div id='forgetDiv'>
-        <nav id='forgetNav'>
-            <h2>Instagram</h2>
+    <div className='w-screen h-screen flex justify-center items-center flex-col'>
+        <nav className='w-screen h-[50px] border border-[#FFFFFF7A] flex justify-around items-center box-border'>
+            <h2 className='font-[cursive]'>Instagram</h2>
             <div>
                 <Link to={'/signup'}>
-                    <button id='forgetSignup'>SignUp</button>
+                    <button className='bg-[#1D00FF] h-[30px] text-[16px] p-[2px] rounded-[8px] cursor-pointer'>SignUp</button>
                 </Link>
                 <Link to={'/'}>
-                    <button id='forgetLogin'>Login</button>
+                    <button className='w-[60px] border-none text-[#1D00FF] cursor-pointer text-[16px]'>Login</button>
                 </Link>
             </div>
         </nav>
-        <div id='forgetPass' style={{height:"400px"}}>
+        <div className='m-auto w-[400px] h-[70vh] border border-[#FFFFFF7A] box-border flex justify-evenly items-center flex-col rounded-[8px]'>
             <h2>Reset Password</h2>
-            <input style={{width:"380px"}} type="password" name='newPassword' value={newPassword} onChange={fun1} placeholder='Enter new Password'/>
-            <button onClick={fun2} id='btn'>Set Password</button>
+            <input className='w-[380px] h-[45px] border border-[#FFFFFF7A] text-white pl-[2px] rounded-[6px] bg-[252525] text-[14px]' type="password" name='newPassword' value={newPassword} onChange={fun1} placeholder='Enter new Password'/>
+            <button onClick={fun2} className='w-[90%] h-[30px] bg-[#1D00FF] text-[17px] rounded-6px]'>Set Password</button>
         </div>
     </div>
   )

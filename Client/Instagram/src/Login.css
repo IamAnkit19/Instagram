@@ -1,28 +1,27 @@
-*{
+/* *{
     margin: 0;
     padding: 0;
     color: white;
-}
+} */
 
-.main{
+/* .main{
     width: 100vw;
     height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-}
+} */
 
-.fields{
+/* .fields{
     height: 70vh;
     width: 300px;
-    /* border: 1px solid white; */
     display: flex;
     justify-content: space-evenly;
     align-items: center;
     flex-direction: column;
-}
+} */
 
-.fields input{
+/* .fields input{
     width: 90%;
     height: 45px;
     border: 1px solid rgba(255, 255, 255, 0.475);
@@ -31,36 +30,36 @@
     border-radius: 6px;
     background-color: rgb(37, 37, 37);
     font-size: 14px;
-}
+} */
 
-.fields button{
+/* .fields button{
     width: 90%;
     height: 30px;
     background-color: blue;
     font-size: 17px;
     border-radius: 6px;
-}
+} */
 
-.fields p{
+/* .fields p{
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 15px;
-}
+} */
 
-.fields p button{
+/* .fields p button{
     width: 60px;
     border: none;
     color: rgb(0, 85, 255);
     background-color: black;
     cursor: pointer;
     font-size: 16px;
-}
+} */
 
-.fields p button:hover{
+/* .fields p button:hover{
     text-decoration: underline;
-}
+} */
 
-.fields h1{
+/* .fields h1{
     font-family: cursive;
-}
+} */

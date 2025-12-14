@@ -18,9 +18,10 @@ const Login = () => {
     async function fun2(){
         try{
             let res = await axios.post('http://localhost:4000/login',input);
-            alert(res.data)
+            // alert(res.data)
             console.log(res.status);
             if(res.status == 200){
+                localStorage.setItem("Token",res.data);
                 navigate('/home')
             }
         }
@@ -29,21 +30,21 @@ const Login = () => {
         }
     }
   return (
-    <div className='main'>
+    <div className='w-screen h-screen flex justify-center items-center'>
         <div id="image">
             <img src={landingImage} alt="" />
         </div>
-        <div className='fields'>
-            <h1>Instagram</h1>
-            <input type="email" name='email' value={input.email} onChange={fun1} placeholder='Enter your email'/>
-            <input type="password" name='passWord' value={input.passWord} onChange={fun1} placeholder='Enter your password'/>
-            <button onClick={fun2}>Login</button>
+        <div className='h-[70vh] w-[300px] flex justify-evenly items-center flex-col'>
+            <h1 className='font-[cursive]'>Instagram</h1>
+            <input type="email" name='email' value={input.email} onChange={fun1} placeholder='Enter your email' className='w-[90%] h-[45px] border border-[#FFFFFF7A] rounded-[6px] pl-[2px] text-white bg-[#252525] text-[14px]'/>
+            <input type="password" name='passWord' value={input.passWord} onChange={fun1} placeholder='Enter your password' className='w-[90%] h-[45px] border border-[#FFFFFF7A] rounded-[6px] pl-[2px] text-white bg-[#252525] text-[14px]'/>
+            <button onClick={fun2} className='w-[90%] h-[30px] bg-[#1D00FF] text-[17px] rounded-[6px]'>Login</button>
             <Link to={'/forget-password'}>
-                <p>Forget Password</p>
+                <p className='flex justify-center items-center text-[15px]'>Forget Password</p>
             </Link>
-            <p>Don't have an account? 
+            <p className='flex justify-center items-center text-[15px]'>Don't have an account? 
                 <Link to={'/signup'}>
-                    <button>SignUp</button>
+                    <button className='w-[60px] text-[#1D00FF] text-[16px] border-none cursor-pointer hover:underline'>SignUp</button>
                 </Link>
             </p>
         </div>

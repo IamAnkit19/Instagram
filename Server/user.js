@@ -5,22 +5,34 @@ let userSchema = mongoose.Schema({
         type:String
     },
     userName:{
-        type:String
+        type:String,
+        unique:true
     },
     email:{
-        type:String
+        type:String,
+        unique:true
     },
     passWord:{
         type:String
     },
-    // role:{
-    //     type:String,
-    //     enum:["user","admin","instructor"],
-    //     default:"user"
-    // },
+    following:[{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User"
+    }],
+    followers:[{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User"
+    }],
+    dp:{
+        type:String
+    },
+    // posts:[{
+    //     type: mongoose.Schema.Types.ObjectId,
+    //     ref: "Upload"
+    // }],
     resetToken: String,
     resetTokenExpiry: Date
 })
 
-let User = mongoose.model("user",userSchema)
+let User = mongoose.model("User",userSchema)
 module.exports=User
