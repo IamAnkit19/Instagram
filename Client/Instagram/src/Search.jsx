@@ -46,8 +46,17 @@ const Search = ({closeSearch}) => {
             let token = localStorage.getItem("Token");
             let res = await axios.post(`http://localhost:4000/follow/${id}`, {}, {headers:{Authorization:token}});
             console.log(res.data.msg);
-            if(res.data.status == 200){
-                // Pending Here....
+            if(res.status == 200){
+                if(res.data.msg == "Followed"){
+                    setCurrentUser({...currentUser,following: [...currentUser.following, id]})
+                }
+                else if(res.data.msg == "Unfollowed"){
+                    setCurrentUser({
+                        ...currentUser, following: currentUser.following.filter((a)=>{
+                            return a != id;
+                        })
+                    })
+                }
             }
             else{
                 console.log(res.data.msg);
@@ -57,8 +66,11 @@ const Search = ({closeSearch}) => {
             console.log(error);
         }
     }
+    const isFollowing = (id)=>{
+        return currentUser.following.some((x)=>{return x == id});
+    }
   return (
-    <div className='w-[25vw] absolute top-[0px] z-20 left-[0px] h-screen border border-[#FFFFFF7A] flex box-border flex-col items-center rounded-[8px] gap-[20px]'>
+    <div className='w-[25vw] fixed top-[0px] z-20 left-[0px] h-screen border border-[#FFFFFF7A] flex box-border flex-col items-center rounded-[8px] gap-[20px]'>
         <button className='w-[40px] h-[40px] text-[20px] rounded-[50%] border border-[#FFFFFF7A] self-end' onClick={closeSearch}>X</button>
         <div className='w-[80%] h-[50px]'>
             <input type="text" placeholder='Enter username to search' onChange={fun1} className='w-[100%] h-[100%] rounded-[8px] text-white text-[18px] border-[2px] pl-[5px] pr-[5px] box-border'/>
@@ -70,8 +82,7 @@ const Search = ({closeSearch}) => {
                     return(<div className='w-[100%] flex justify-between'>
                         <h3>{a.userName}</h3>
                         {
-                            a._id != currentUser._id ? <button onClick={()=>follow(a._id)} className='cursor-pointer'>{currentUser.following.some((x)=>{
-                                return x == a._id; }) ? "Unfollow" : "Follow"}</button> : null
+                            a._id != currentUser._id ? <button onClick={()=>follow(a._id)} className={`cursor-pointer w-[70px] h-[25px] rounded-[8px] ${isFollowing(a._id) ? 'bg-[#FFFFFF7A]' : 'bg-[#071AF2]'} `}>{isFollowing(a._id) ? "Unfollow" : "Follow"}</button> : null
                         }
                     </div>)
                 })

@@ -12,6 +12,7 @@ let crypto = require('crypto');
 let {sendEmail} = require('./sendEmail')
 let Upload = require('./Upload');
 let Comment = require('./Comment');
+const Story = require('./Story')
 
 // npm i mongoose
 // npm i bcrypt
@@ -392,6 +393,37 @@ app.get('/myPosts', auth, async (req, res)=>{
    const data = await Upload.find({user:userId});
    // console.log(data);
    return res.status(200).send(data);
+})
+
+app.post('/story', auth, async(req, res)=>{
+   const {mediaUrl} = req.body;
+   if(!mediaUrl)
+      return res.status(400).json({msg: "Media Required"});
+   const story = new Story({
+      mediaUrl,
+      user: req.user._id,
+      expiresAt: new Date(Date.now() + 24 * 60 * 60 * 1000)
+   });
+
+   await story.save();
+   res.status(200).json({msg: "Story Uploaded"});
+})
+
+app.get('/stories', auth, async(req, res)=>{
+   const me = await User.findById(req.user._id);
+
+   const allowedUsers = [
+      req.user._id,
+      ...me.following,
+      ...me.followers
+   ];
+
+   const stories = await Story.find({
+      user: {$in: allowedUsers},
+      expiresAt: {$gt: new Date()}
+   }).populate("user", "name dp").sort({createdAt: -1});
+
+   return res.status(200).json(stories);
 })
 
 app.listen(4000, () => {
