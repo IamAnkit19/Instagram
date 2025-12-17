@@ -3,6 +3,8 @@ import './MainContents.css'
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
+const API_BASE_URL = "https://instagram-2-ql2f.onrender.com";
+
 const Search = ({closeSearch}) => {
     // let [input, setInput] = useState("");
     const [searchData, setSearchData] = useState([]);
@@ -16,7 +18,7 @@ const Search = ({closeSearch}) => {
                     alert("Please Login First");
                     navigate('/')
                 }
-                const profile = await axios.get('http://localhost:4000/myProfile', {headers: {Authorization: token}})
+                const profile = await axios.get(`${API_BASE_URL}/myProfile`, {headers: {Authorization: token}})
                 setCurrentUser(profile.data);
                 console.log(profile.data);
             }
@@ -28,7 +30,7 @@ const Search = ({closeSearch}) => {
     },[])
     async function fun1(e){
         try{
-            let data = await axios.post(`http://localhost:4000/search?q=${e.target.value}`);
+            let data = await axios.post(`${API_BASE_URL}/search?q=${e.target.value}`);
             console.log(data.data.msg);
             if(!data.data.msg){
                 setSearchData([])
@@ -44,7 +46,7 @@ const Search = ({closeSearch}) => {
     const follow = async(id)=>{
         try{
             let token = localStorage.getItem("Token");
-            let res = await axios.post(`http://localhost:4000/follow/${id}`, {}, {headers:{Authorization:token}});
+            let res = await axios.post(`${API_BASE_URL}/follow/${id}`, {}, {headers:{Authorization:token}});
             console.log(res.data.msg);
             if(res.status == 200){
                 if(res.data.msg == "Followed"){

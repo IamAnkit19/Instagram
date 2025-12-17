@@ -4,6 +4,8 @@ import './Login.css'
 import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 
+const API_BASE_URL = "https://instagram-2-ql2f.onrender.com";
+
 const Signup = () => {
     const [input, setInput] = useState({
         name:"",
@@ -18,7 +20,7 @@ const Signup = () => {
     }
     async function fun2(){
         try{
-            let res = await axios.post('http://localhost:4000/create',input);
+            let res = await axios.post(`${API_BASE_URL}/create`,input);
             alert(res.data)
             if(res.status == 200){
                 navigate('/');

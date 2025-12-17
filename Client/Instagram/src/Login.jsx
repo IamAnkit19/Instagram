@@ -5,6 +5,8 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 import axios from 'axios'
 
+const API_BASE_URL = "https://instagram-2-ql2f.onrender.com";
+
 const Login = () => {
     const [input, setInput] = useState({
         email:"",
@@ -17,7 +19,7 @@ const Login = () => {
     }
     async function fun2(){
         try{
-            let res = await axios.post('http://localhost:4000/login',input);
+            let res = await axios.post(`${API_BASE_URL}/login`,input);
             // alert(res.data)
             console.log(res.status);
             if(res.status == 200){

@@ -13,6 +13,8 @@ const supabaseUrl = 'https://xnenqbetuufqkuxzwvvy.supabase.co'
 const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhuZW5xYmV0dXVmcWt1eHp3dnZ5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjM2OTgwNjYsImV4cCI6MjA3OTI3NDA2Nn0.aDiz6CDIMxvLn76hnxAifd0t7saqpuk9RM5OdkOmS5M'
 const supabase = createClient(supabaseUrl, supabaseKey)
 
+const API_BASE_URL = "https://instagram-2-ql2f.onrender.com";
+
 const getCurrentUserId = ()=>{
   try{
     const token = localStorage.getItem("Token");
@@ -48,7 +50,7 @@ const HomePage = () => {
           alert("Please Login First");
           navigate('/')
         }
-        const data = await axios.get('http://localhost:4000/posts',{headers:{"Authorization":`${token}`}})
+        const data = await axios.get(`${API_BASE_URL}/posts`,{headers:{"Authorization":`${token}`}})
         console.log(data.data);
         
         // setApiData([...apiData,data.data[0]]);
@@ -69,7 +71,7 @@ const HomePage = () => {
           alert("Please Login First");
           navigate('/')
         }
-        const profile = await axios.get('http://localhost:4000/myProfile', {headers: {Authorization: token}})
+        const profile = await axios.get(`${API_BASE_URL}/myProfile`, {headers: {Authorization: token}})
         setCurrentUser(profile.data);
         console.log(profile.data);
       }
@@ -93,7 +95,7 @@ const HomePage = () => {
       }
       // console.log(token);
       // axios.post(url, data, config)  So in the below code the empty body as second argument is required.
-      let data = await axios.post(`http://localhost:4000/like/${a._id}`,{},{headers:{"Authorization":`${token}`}});
+      let data = await axios.post(`${API_BASE_URL}/like/${a._id}`,{},{headers:{"Authorization":`${token}`}});
       console.log(data.data);
       console.log(data.data.message);
       setApiData((prev)=>{
@@ -139,7 +141,7 @@ const HomePage = () => {
         alert("Please Login First");
         navigate('/')
       }
-      let data = await axios.get(`http://localhost:4000/getComments/${id}`, {headers:{Authorization: token}});
+      let data = await axios.get(`${API_BASE_URL}/getComments/${id}`, {headers:{Authorization: token}});
       console.log(data.data);
       setComments(data.data);
     }
@@ -155,7 +157,7 @@ const HomePage = () => {
         alert("Please Login First");
         navigate('/')
       }
-      let res = await axios.post(`http://localhost:4000/deleteComment/${id}`, {}, {headers:{Authorization:token}});
+      let res = await axios.post(`${API_BASE_URL}/deleteComment/${id}`, {}, {headers:{Authorization:token}});
       console.log(res.data);
       getComments(postId);
       if(res.status == 200){
@@ -186,7 +188,7 @@ const HomePage = () => {
         alert("Please Login First");
         navigate('/')
       }
-      let res = await axios.post(`http://localhost:4000/comment/${id}`,{text: commentInp[id]}, {headers:{Authorization:token}});
+      let res = await axios.post(`${API_BASE_URL}/comment/${id}`,{text: commentInp[id]}, {headers:{Authorization:token}});
       console.log(res.data);
       setCommentInp("");
       if(res.status == 201){
@@ -215,7 +217,7 @@ const HomePage = () => {
         alert("Please Login First");
         navigate('/')
       }
-      let res = await axios.post(`http://localhost:4000/follow/${id}`, {}, {headers:{Authorization:token}});
+      let res = await axios.post(`${API_BASE_URL}/follow/${id}`, {}, {headers:{Authorization:token}});
       console.log(res.data.msg);
       if(res.status == 200){
         if(res.data.msg == "Followed"){
@@ -248,7 +250,7 @@ const HomePage = () => {
         alert("Please Login First");
         navigate('/')
       }
-      let res = await axios.get('http://localhost:4000/stories', {headers: {Authorization: token}});
+      let res = await axios.get(`${API_BASE_URL}/stories`, {headers: {Authorization: token}});
       console.log(res.data);
       if(res.status == 200){
         setStories(res.data);
@@ -279,7 +281,7 @@ const HomePage = () => {
       const mediaUrl = `${supabaseUrl}/storage/v1/object/public/insta/insta_images/${story.name}`;
       console.log("Image URL:", mediaUrl);
       let token = localStorage.getItem("Token");
-      let res = await axios.post('http://localhost:4000/story',{mediaUrl},{headers:{Authorization:token}});
+      let res = await axios.post(`${API_BASE_URL}/story`,{mediaUrl},{headers:{Authorization:token}});
       console.log(res.data);
       setStory(null);
       getStories(currentUserId)

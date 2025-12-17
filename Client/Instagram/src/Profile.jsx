@@ -5,6 +5,8 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { Grid3x3 } from 'lucide-react';
 
+const API_BASE_URL = "https://instagram-2-ql2f.onrender.com";
+
 const Profile = () => {
   const [userProfile, setUserProfile] = useState({followers:0, following:0});
   const [userPosts, setUserPosts] = useState([]);
@@ -17,7 +19,7 @@ const Profile = () => {
           alert("Please Login First");
           navigate('/')
         }
-        const [profile, posts] = await Promise.all([axios.get('http://localhost:4000/myProfile', {headers: {Authorization: token}}), axios.get('http://localhost:4000/myPosts', {headers: {Authorization: token}})])
+        const [profile, posts] = await Promise.all([axios.get(`${API_BASE_URL}/myProfile`, {headers: {Authorization: token}}), axios.get(`${API_BASE_URL}/myPosts`, {headers: {Authorization: token}})])
         setUserProfile(profile.data);
         setUserPosts(posts.data);
         console.log(profile.data);

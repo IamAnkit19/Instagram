@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import { useState } from 'react'
 import axios from 'axios'
 
-const API_BASE_URL = "https://instagram-x5gy.onrender.com";
+const API_BASE_URL = "https://instagram-2-ql2f.onrender.com";
 
 const ForgetPassword = () => {
     const [email, setEmail] = useState("");

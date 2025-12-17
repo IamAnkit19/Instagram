@@ -4,6 +4,8 @@ import { useState } from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 
+const API_BASE_URL = "https://instagram-2-ql2f.onrender.com";
+
 const Reset = () => {
     const [newPassword, setNewPassword] = useState("")
     let  parameter = useParams()
@@ -15,7 +17,7 @@ const Reset = () => {
     }
     async function fun2(){
         try{
-            let res = await axios.post(`http://localhost:4000/reset-password/${token}`,{newPassword});
+            let res = await axios.post(`${API_BASE_URL}/reset-password/${token}`,{newPassword});
             alert(res.data)
         }
         catch(error){
