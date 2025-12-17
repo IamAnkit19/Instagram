@@ -13,6 +13,7 @@ let {sendEmail} = require('./sendEmail')
 let Upload = require('./Upload');
 let Comment = require('./Comment');
 const Story = require('./Story')
+require('dotenv').config();
 
 // npm i mongoose
 // npm i bcrypt
@@ -20,7 +21,11 @@ const Story = require('./Story')
 let app = express()
 app.use(cors())
 app.use(express.json())
-mongoose.connect("mongodb://127.0.0.1:27017/Instagram").
+// mongoose.connect("mongodb://127.0.0.1:27017/Instagram").
+//    then(() => {
+//       console.log("db conneted...");
+//    })
+mongoose.connect(process.env.MONGO_URL).
    then(() => {
       console.log("db conneted...");
    })
