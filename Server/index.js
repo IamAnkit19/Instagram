@@ -400,6 +400,24 @@ app.get('/myPosts', auth, async (req, res)=>{
    return res.status(200).send(data);
 })
 
+app.get('/myFollowers', auth, async (req, res)=>{
+   const userId  = req.user._id;
+   if(!userId){
+      return res.status(401).json({msg:"Invalid User!"});
+   }
+   const user = await User.findById(userId);
+   return res.status(200).send(user.followers.populate('followers', 'userName dp'));
+})
+
+app.get('/myFollowing', auth, async (req, res)=>{
+   const userId  = req.user._id;
+   if(!userId){
+      return res.status(401).json({msg:"Invalid User!"});
+   }
+   const user = await User.findById(userId);
+   return res.status(200).send(user.following.populate('following', 'userName dp'));
+})
+
 app.post('/story', auth, async(req, res)=>{
    const {mediaUrl} = req.body;
    if(!mediaUrl)
@@ -429,6 +447,34 @@ app.get('/stories', auth, async(req, res)=>{
    }).populate("user", "name dp").sort({createdAt: -1});
 
    return res.status(200).json(stories);
+})
+
+app.post('/closeFriend/:id', auth, async(req, res)=>{
+   let userId = req.user._id;
+   let friendId = req.params.id;
+   let friend = await User.findById(friendId);
+   if(!friend){
+      return res.status(404).json({msg:"Friend Not Found!"});
+   }
+   let user = await User.findById(userId);
+   let isAlready = user.closeFriends.includes(friendId);
+   if(isAlready){
+      user.closeFriends = user.closeFriends.filter((a)=>{
+         return a != friendId;
+      })
+      await user.save();
+      return res.status(200).json({msg:"Close Friend Removed"});
+   }
+   user.closeFriends.push(friendId);
+   await user.save();
+   return res.status(200).json({msg:"Close Friend Added"});
+})
+
+app.get('/closeFriends', auth, async(req, res)=>{
+   let userId = req.user._id;
+   let user = await User.findById(userId).populate('closeFriends', 'userName dp');
+   let closeFriends = user.closeFriends;
+   return res.status(200).send(closeFriends);
 })
 
 app.listen(4000, () => {

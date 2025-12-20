@@ -26,6 +26,10 @@ let userSchema = mongoose.Schema({
     dp:{
         type:String
     },
+    closeFriends:[{
+        type:mongoose.Schema.Types.ObjectId,
+        ref: "User"
+    }],
     // posts:[{
     //     type: mongoose.Schema.Types.ObjectId,
     //     ref: "Upload"
