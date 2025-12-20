@@ -405,8 +405,8 @@ app.get('/myFollowers', auth, async (req, res)=>{
    if(!userId){
       return res.status(401).json({msg:"Invalid User!"});
    }
-   const user = await User.findById(userId);
-   return res.status(200).send(user.followers.populate('followers', 'userName dp'));
+   const user = await User.findById(userId).populate('followers', 'userName dp');
+   return res.status(200).send(user.followers);
 })
 
 app.get('/myFollowing', auth, async (req, res)=>{
@@ -414,8 +414,8 @@ app.get('/myFollowing', auth, async (req, res)=>{
    if(!userId){
       return res.status(401).json({msg:"Invalid User!"});
    }
-   const user = await User.findById(userId);
-   return res.status(200).send(user.following.populate('following', 'userName dp'));
+   const user = await User.findById(userId).populate('following', 'userName dp');
+   return res.status(200).send(user.following);
 })
 
 app.post('/story', auth, async(req, res)=>{
